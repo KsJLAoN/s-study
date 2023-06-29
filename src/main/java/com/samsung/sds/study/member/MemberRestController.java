@@ -40,8 +40,23 @@ public class MemberRestController {
         return memberRepository.save(member);
     }
 
+    @PutMapping("/{id}/email")
+    public Member updateMemberEmail(@PathVariable Long  id,
+                                    @RequestParam String email){
+        Member member = memberRepository.findById(id).get();
+        member.setEmail(email);
+        return memberRepository.save(member);
+    }
 
-
+    @PutMapping("/{id}")
+    public Member updateMember(@PathVariable Long  id,
+                               @RequestParam String name,
+                               @RequestParam String email){
+        Member member = memberRepository.findById(id).get();
+        member.setEmail(email);
+        member.setName(name);
+        return memberRepository.save(member);
+    }
 
 
 
