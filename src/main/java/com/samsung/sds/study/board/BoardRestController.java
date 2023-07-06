@@ -16,8 +16,14 @@ public class BoardRestController {
         List<Board> boards = boardRepository.findAll();
         return boards;
     }
+
     @PostMapping ("/form")
     public Board boardSubmit(@RequestBody Board board){
         return boardRepository.save(board);
+    }
+
+    @GetMapping ("/form")
+    public Board getBoard(@RequestParam Long id){
+        return boardRepository.findById(id).orElse(null);
     }
 }
