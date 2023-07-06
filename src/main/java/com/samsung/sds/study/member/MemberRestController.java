@@ -3,7 +3,9 @@ package com.samsung.sds.study.member;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -67,6 +69,16 @@ public class MemberRestController {
         return memberRepository.save(member);
     }
 
-
+    @PostMapping
+    public List <Member>  setMembers(@RequestBody List<Map<String,Object>>members){
+        List <Member> newMembers = new ArrayList<>();
+        for(Map map:members){
+            Member member = new Member();
+            member.setEmail(map.get("email").toString());
+            member.setName(map.get("name").toString());
+            newMembers.add(memberRepository.save(member));
+        }
+        return newMembers;
+    }
 
 }
